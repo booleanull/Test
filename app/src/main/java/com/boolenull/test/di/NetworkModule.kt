@@ -1,6 +1,6 @@
 package com.boolenull.test.di
 
-import com.boolenull.test.data.ApiService
+import com.boolenull.test.data.network.ApiService
 import com.boolenull.test.utils.BASE_URL
 import com.google.gson.GsonBuilder
 import dagger.Module

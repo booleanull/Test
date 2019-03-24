@@ -1,10 +1,7 @@
 package com.boolenull.test
 
 import android.app.Application
-import com.boolenull.test.di.ApplicationComponent
-import com.boolenull.test.di.ApplicationModule
-import com.boolenull.test.di.DaggerApplicationComponent
-import com.boolenull.test.di.NetworkModule
+import com.boolenull.test.di.*
 
 class MyApplication: Application() {
 
@@ -14,6 +11,7 @@ class MyApplication: Application() {
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
                 .networkModule(NetworkModule())
+                .databaseModule(DatabaseModule())
                 .build()
     }
 

@@ -1,4 +1,4 @@
-package com.boolenull.test.data
+package com.boolenull.test.data.network
 
 import com.boolenull.test.model.Post
 import io.reactivex.Single
