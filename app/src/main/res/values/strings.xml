@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Test</string>
+    <string name="post">POST</string>
+    <string name="open">OPEN</string>
+    <string name="get">Get</string>
+    <string name="put">Put</string>
+    <string name="database">Database</string>
+    <string name="close">Close</string>
 </resources>
