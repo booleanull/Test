@@ -1,5 +1,6 @@
 package com.boolenull.test.activity
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.widget.Toast
@@ -17,8 +18,10 @@ class MainActivity: MvpAppCompatActivity(), MainView {
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
 
-    private var firstFragment = FirstFragment()
+    private val firstFragment = FirstFragment()
     private val secondFragment = SecondFragment()
+
+    private var alertDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,10 +52,21 @@ class MainActivity: MvpAppCompatActivity(), MainView {
     }
 
     override fun showDialogMessage(title: String, post: Post) {
-        Toast.makeText(this, "${title} + ${post.toString()}", Toast.LENGTH_SHORT).show()
+        alertDialog = AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(post.toString())
+                .setPositiveButton(android.R.string.ok, null)
+                .create()
+
+        alertDialog?.setOnDismissListener {
+            mainPresenter.viewState.hideDialogMessage()
+        }
+
+        alertDialog?.show()
     }
 
     override fun hideDialogMessage() {
+        alertDialog?.dismiss()
     }
 
     override fun showSecondFragment() {

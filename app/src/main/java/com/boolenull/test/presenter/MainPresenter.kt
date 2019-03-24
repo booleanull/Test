@@ -11,34 +11,20 @@ class MainPresenter: MvpPresenter<MainView>() {
 
     private val postProvider = PostProvider(this)
 
-    var progress = false
-
-    fun sendPost(post: Post) {
-        progress = true
-        postProvider.sendPost(post)
+    fun sendPostRequest(post: Post) {
+        postProvider.sendPostRequest(post)
     }
 
-    fun getPost(id: Int) {
-        progress = true
-        postProvider.getPost(id)
+    fun sendGetRequest(id: Int) {
+        postProvider.sendGetRequest(id)
     }
 
-    fun putPost(post: Post) {
-        progress = true
-        postProvider.putPost(post)
+    fun sendPutRequest(post: Post) {
+        postProvider.sendPutRequest(post)
     }
 
-    fun getFromDatabase(id: Int) {
-        progress = true
-        postProvider.getFromDatabase(id)
-    }
-
-    fun openSecondFragment() {
-        viewState.showSecondFragment()
-    }
-
-    fun closeSecondFragment() {
-        viewState.hideSecondFragment()
+    fun getPostFromDatabase(id: Int) {
+        postProvider.getPostFromDatabase(id)
     }
 
     override fun onDestroy() {

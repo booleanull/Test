@@ -7,5 +7,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [ApplicationModule::class, NetworkModule::class])
 interface ApplicationComponent {
+
     fun inject(postProvider: PostProvider)
 }

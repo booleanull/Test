@@ -2,6 +2,7 @@ package com.boolenull.test.view
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.boolenull.test.model.Post
 
@@ -16,5 +17,6 @@ interface MainView: MvpView {
 
     fun hideSecondFragment()
 
+    @StateStrategyType(SkipStrategy::class)
     fun showError()
 }

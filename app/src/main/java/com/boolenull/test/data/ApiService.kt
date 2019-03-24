@@ -7,11 +7,11 @@ import retrofit2.http.*
 interface ApiService {
 
     @POST("posts")
-    fun sendPost(@Body post: Post): Single<Post>
+    fun sendPostRequest(@Body post: Post): Single<Post>
 
     @GET("posts/{id}")
-    fun getPost(@Path("id") id: Int): Single<Post>
+    fun sendGetRequest(@Path("id") id: Int): Single<Post>
 
     @PUT("posts/{id}")
-    fun putPost(@Path("id") id: Int, @Body post: Post): Single<Post>
+    fun sendPutRequest(@Path("id") id: Int, @Body post: Post): Single<Post>
 }

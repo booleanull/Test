@@ -5,6 +5,7 @@ import com.boolenull.test.MyApplication
 import com.boolenull.test.R
 import com.boolenull.test.model.Post
 import com.boolenull.test.presenter.MainPresenter
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -23,37 +24,28 @@ class PostProvider(val presenter: MainPresenter) {
         MyApplication.applicationComponent.inject(this)
     }
 
-    fun sendPost(post: Post) {
-        subscription = apiService.sendPost(post)
+    fun sendPostRequest(post: Post) {
+        sendRequest(context.getString(R.string.post), apiService.sendPostRequest(post))
+    }
+
+    fun sendGetRequest(id: Int) {
+        sendRequest(context.getString(R.string.get), apiService.sendGetRequest(id))
+    }
+
+    fun sendPutRequest(post: Post) {
+        sendRequest(context.getString(R.string.put), apiService.sendPutRequest(post.id, post))
+    }
+
+    private fun sendRequest(title: String, single: Single<Post>) {
+        subscription = single
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .doAfterTerminate {presenter.progress = false}
                 .subscribe(
-                        {presenter.viewState.showDialogMessage(context.getString(R.string.post), it)},
+                        {presenter.viewState.showDialogMessage(title, it)},
                         {presenter.viewState.showError()})
     }
 
-    fun getPost(id: Int) {
-        subscription = apiService.getPost(id)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .doAfterTerminate {presenter.progress = false}
-                .subscribe(
-                        {presenter.viewState.showDialogMessage(context.getString(R.string.get), it)},
-                        {presenter.viewState.showError()})
-    }
-
-    fun putPost(post: Post) {
-        subscription = apiService.putPost(post.id, post)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .doAfterTerminate {presenter.progress = false}
-                .subscribe(
-                        {presenter.viewState.showDialogMessage(context.getString(R.string.put), it)},
-                        {presenter.viewState.showError()})
-    }
-
-    fun getFromDatabase(id: Int) {
+    fun getPostFromDatabase(id: Int) {
 
     }
 }
