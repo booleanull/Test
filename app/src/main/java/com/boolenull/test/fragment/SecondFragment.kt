@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.boolenull.test.R
 import com.boolenull.test.activity.MainActivity
+import com.boolenull.test.model.Post
 import kotlinx.android.synthetic.main.fragment_second.view.*
 
 class SecondFragment: Fragment(), View.OnClickListener {
@@ -20,15 +21,17 @@ class SecondFragment: Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.postButton -> {
-
-            }
-            R.id.getButton -> {
-
-            }
-            R.id.closeButton -> {
-                (activity as MainActivity).mainPresenter.closeSecondFragment()
+        if (!(activity as MainActivity).mainPresenter.progress) {
+            when (v?.id) {
+                R.id.putButton -> {
+                    (activity as MainActivity).mainPresenter.putPost(Post(1, 1, "Title", "Body"))
+                }
+                R.id.databaseButton -> {
+                    (activity as MainActivity).mainPresenter.getFromDatabase(1)
+                }
+                R.id.closeButton -> {
+                    (activity as MainActivity).mainPresenter.closeSecondFragment()
+                }
             }
         }
     }

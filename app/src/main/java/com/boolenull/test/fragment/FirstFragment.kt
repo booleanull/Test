@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.boolenull.test.R
 import com.boolenull.test.activity.MainActivity
+import com.boolenull.test.model.Post
 import com.boolenull.test.view.FirstFragmentView
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_first.view.*
@@ -22,15 +23,17 @@ class FirstFragment: Fragment(), FirstFragmentView, View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.postButton -> {
-
-            }
-            R.id.getButton -> {
-
-            }
-            R.id.openButton -> {
-                (activity as MainActivity).mainPresenter.openSecondFragment()
+        if (!(activity as MainActivity).mainPresenter.progress) {
+            when (v?.id) {
+                R.id.postButton -> {
+                    (activity as MainActivity).mainPresenter.sendPost(Post(1, 1, "Title", "Body"))
+                }
+                R.id.getButton -> {
+                    (activity as MainActivity).mainPresenter.getPost(1)
+                }
+                R.id.openButton -> {
+                    (activity as MainActivity).mainPresenter.openSecondFragment()
+                }
             }
         }
     }

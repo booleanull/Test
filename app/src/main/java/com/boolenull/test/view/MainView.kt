@@ -8,15 +8,13 @@ import com.boolenull.test.model.Post
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface MainView: MvpView {
 
-    fun showProgress()
-
-    fun hideProgress()
-
-    fun showDialogMessage(post: Post)
+    fun showDialogMessage(title: String, post: Post)
 
     fun hideDialogMessage()
 
     fun showSecondFragment()
 
     fun hideSecondFragment()
+
+    fun showError()
 }

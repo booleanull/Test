@@ -2,6 +2,7 @@ package com.boolenull.test.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.boolenull.test.R
@@ -16,7 +17,7 @@ class MainActivity: MvpAppCompatActivity(), MainView {
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
 
-    private val firstFragment = FirstFragment()
+    private var firstFragment = FirstFragment()
     private val secondFragment = SecondFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,15 +48,8 @@ class MainActivity: MvpAppCompatActivity(), MainView {
                 .commit()
     }
 
-    override fun showProgress() {
-
-    }
-
-    override fun hideProgress() {
-
-    }
-
-    override fun showDialogMessage(post: Post) {
+    override fun showDialogMessage(title: String, post: Post) {
+        Toast.makeText(this, "${title} + ${post.toString()}", Toast.LENGTH_SHORT).show()
     }
 
     override fun hideDialogMessage() {
@@ -69,5 +63,11 @@ class MainActivity: MvpAppCompatActivity(), MainView {
     override fun hideSecondFragment() {
         deleteFragment(secondFragment)
         firstFragment.enableSecondFragmentButton()
+    }
+
+    override fun showError() {
+        Toast
+                .makeText(this, getString(R.string.error), Toast.LENGTH_SHORT)
+                .show()
     }
 }

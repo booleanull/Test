@@ -6,4 +6,5 @@
     <string name="put">Put</string>
     <string name="database">Database</string>
     <string name="close">Close</string>
+    <string name="error">Произошла ошибка!</string>
 </resources>
